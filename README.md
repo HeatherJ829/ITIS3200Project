@@ -38,7 +38,7 @@ FILES:
     votesBROKEN.txt -- Stores the vote casted no HMAC\
     adminBROKEN.txt -- Stores admin login information
 
-TEST CASES
+SUCCESS TEST CASES
     - Open Secure.java
     - Register as a voter
     - Login and vote for Alice
@@ -54,6 +54,24 @@ TEST CASES
     - Copy that vote entry and duplicate it to simulate duplicate entries
     - Login as admin and check results
     - Duplicate votes detected and not counted ~ Attempt Failed
+
+FAILURE TEST CASES
+    - Open Broken.java
+    - Register as a voter
+    - Login and vote for Alice
+    - Try to login again ~Attempt Failed this system was kept in place as we are focusing on HMAC protections.
+    - Open voter.txt and change the true variable on the voters information to false
+    - Try to login again ~Attempt worked! There is no prevention to stop the hasVoted flag from being altered
+    - Register as a different voter
+    - Login and vote for Alice
+    - Open votes.txt and change Alice to Evil Mallory
+    - Login as admin and check the results
+    - No alert of tampered vote, vote was counted ~Attempt Worked! No HMAC on votes means the system does not know if a vote was tampered with.
+    - Open votes.txt and change Evil Mallory back to Alice
+    - Copy that vote entry and duplicate it to simulate duplicate entries
+    - Login as admin and check results
+    - Duplicate votes detected and not counted ~ Attempt Worked!
+Mechanism
 
 Mechanism
 
